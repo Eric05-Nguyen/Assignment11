@@ -1,0 +1,77 @@
+package playlistStudent;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+public class Student {
+    private String studentId;
+    private String fullName;
+    private Date dateOfBirth;
+    private String major;
+    private float gpa;
+    public String getID() {
+        return studentId;
+    }
+    public String getName() {
+        return fullName;
+    }
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+    public String getMajor() {
+        return major;
+    }
+    public float getGPA() {
+        return gpa;
+    }
+    public void enterStudentInfor() {
+        Scanner nhap = new Scanner(System.in);
+        System.out.println("ID cua hoc sinh vien la :");
+        this.studentId = nhap.nextLine();
+        System.out.println("Nhap ho ten hoc sinh :");
+        this.fullName = nhap.nextLine();
+        System.out.println("Nhap ngay sinh(dd/MM/yyyy) :");
+        String dateInput = nhap.nextLine();
+        try {
+            SimpleDateFormat spf = new SimpleDateFormat("dd/mm/yyyy");
+            dateOfBirth = spf.parse(dateInput);
+        } catch (ParseException e) {
+            System.out.println("Error");
+        }
+        System.out.println("Nhap chuyen nganh :");
+        major = nhap.nextLine();
+        System.out.println("Nhap gpa");
+        gpa = nhap.nextFloat();
+    }
+    public void editStudentById(String idToEdit) {
+        Scanner nhap = new Scanner(System.in);
+        if (this.studentId.equals(idToEdit)) {
+            System.out.print("Enter Full Name: ");
+            fullName = nhap.nextLine();
+            System.out.print("Nhap ngay sinh (dd/MM/yyyy): ");
+            String dateInput = nhap.nextLine();
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                dateOfBirth = sdf.parse(dateInput);
+            } catch (ParseException e) {
+                System.out.println("Invalid.");
+            }
+            System.out.print("Enter Major: ");
+            major = nhap.nextLine();
+            System.out.println("Enter GPA: ");
+            gpa = nhap.nextFloat();
+        } else {
+            System.out.println("N/A");
+        }
+    }
+    public void displayStudentInfor() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        System.out.println("ID:" + studentId);
+        System.out.println("Ho ten:" + fullName);
+        System.out.println("ngay sinh :" + sdf.format(dateOfBirth));
+        System.out.println("Nganh:" + major);
+        System.out.println("GPa:" + gpa);
+    }
+}
