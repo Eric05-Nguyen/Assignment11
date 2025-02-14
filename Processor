@@ -1,0 +1,69 @@
+package playlistStudent;
+
+import java.util.Scanner;
+
+public class Processor {
+    public static void main(String[] args) {
+        Scanner nhap = new Scanner(System.in);
+        StudentList studentList = new StudentList();
+        int choice;
+        do {
+            System.out.println("----------------------------------------");
+            System.out.println("0.Exit");
+            System.out.println("1.Enter student information");
+            System.out.println("2.Display all students");
+            System.out.println("3.Find student by id");
+            System.out.println("4.Delete student by id");
+            System.out.println("5.Edit student by id");
+            System.out.println("Chose an option:");
+            choice = nhap.nextInt();
+            nhap.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.println("----------------------------------------");
+                    System.out.println("Enter number of student");
+                    int n = nhap.nextInt();
+                    for (int i = 0; i < n; i++) {
+                        Student student = new Student();
+                        student.enterStudentInfor();
+                        studentList.studentList.add(student);
+                    }
+                    break;
+                case 2:
+                    System.out.println("----------------------------------------");
+                    studentList.displayAllStudents();
+                    break;
+                case 3:
+                    System.out.println("----------------------------------------");
+                    System.out.println("Enter Student ID to find :");
+                    String idToFind = nhap.nextLine();
+                    Student foundStudent = studentList.findStudentById(idToFind);
+                    if (foundStudent != null) {
+                        foundStudent.displayStudentInfor();
+                    } else {
+                        System.out.println("Student not found");
+                    }
+                    break;
+                case 4:
+                    System.out.println("----------------------------------------");
+                    System.out.println("Enter Student id to delete :");
+                    String idToDelete = nhap.nextLine();
+                    if (studentList.deleteStudentById(idToDelete)) {
+                        System.out.println("Student deleted successfully");
+                    } else {
+                        System.out.println("Student not found");
+                    }
+                    break;
+                case 5:
+                    System.out.println("----------------------------------------");
+                    System.out.println("Enter Student Id to edit:");
+                    String idToEdit = nhap.nextLine();
+                    studentList.editStudentById(idToEdit);
+                    break;
+                default:
+                    System.out.println("----------------------------------------");
+                    System.out.println("Invalid option,please try again ");
+            }
+        } while (choice != 0);
+    }
+}
