@@ -1,0 +1,58 @@
+package Zoo;
+
+import java.util.Scanner;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+public class Processor {
+    public static void main(String[] args) {
+        Scanner nhap = new Scanner(System.in);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        AnimalList animalList = new AnimalList();
+        System.out.println("nhap so luong dong vat:");
+        int n = nhap.nextInt();
+        nhap.nextLine();
+        for (int i = 0; i < n; i++) {
+            System.out.println("Nhap thong tin cho con vat thu" + (i + 1));
+            String type;
+            while (true) {
+                System.out.println("loai dong vat(dog/cat):");
+                type = nhap.nextLine();
+                if (type.equalsIgnoreCase("dog") || type.equalsIgnoreCase("cat")) {
+                    break;
+                }
+                System.out.println("Loai dong vat khong hop le !!!Nhap lai");
+            }
+            System.out.println("ID :");
+            String id = nhap.nextLine();
+            System.out.println("Nguon goc:");
+            String source = nhap.nextLine();
+            Date dateOfBirth = null;
+            while (dateOfBirth == null) {
+                try {
+                    System.out.println("nhap ngay sinh (dd/MM/yyyy)");
+                    String dateInput = nhap.nextLine();
+                    dateOfBirth = sdf.parse(dateInput);
+                } catch (Exception e) {
+                    System.out.println("dinh dang ngay sai !nhap lai theo dinh dang(dd/MM/yyyy)");
+                }
+            }
+            System.out.println("Mau sac :");
+            String color = nhap.nextLine();
+            if (type.equalsIgnoreCase("dog")) {
+                System.out.println("Giong cho:");
+                String breed = nhap.nextLine();
+                Dog dog = new Dog(id, source, dateOfBirth, color, breed);
+                animalList.addAnimal(dog);
+            } else if (type.equalsIgnoreCase("cat")) {
+                Cat cat = new Cat(id, source, dateOfBirth, color);
+                animalList.addAnimal(cat);
+            } else {
+                System.out.println("Loai dong vat khong hop le");
+            }
+        }
+        System.out.println("----------------Danh sach dong vat-----------------");
+        animalList.displayAll();
+    }
+}
