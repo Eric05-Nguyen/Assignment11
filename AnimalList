@@ -1,0 +1,16 @@
+
+package Zoo;
+import java.util.ArrayList;
+public class AnimalList {
+    ArrayList<Animal> animals= new ArrayList<>();
+    void addAnimal(Animal animal){
+        animals.add(animal);
+    }
+    void displayAll(){
+        for(Animal animal: animals){
+            animal.display();
+            animal.makeSound();
+            System.out.println("-------------------------------");
+        }
+    }
+}
