@@ -1,0 +1,19 @@
+package Zoo;
+
+import java.util.Date;
+
+public class Dog extends Animal {
+    String breed;
+    public Dog(String id, String source, Date dateOfBirth, String color, String breed) {
+        super(id,source,dateOfBirth,color);
+        this.breed=breed;
+    }
+    void makeSound(){
+        System.out.println("woof! woof!");
+    }
+     public void display(){
+         System.out.println("Loai:cho");
+        super.display();
+        System.out.println("Breed:"+breed);
+    }
+}
